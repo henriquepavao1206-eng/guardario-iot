@@ -1,0 +1,16 @@
+# Segredos
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Saidas da ponte
+ponte/saida/
+
+# Sistema
+.DS_Store
+Thumbs.db
