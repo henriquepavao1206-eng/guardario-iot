@@ -1,0 +1,21 @@
+# 2026-11-12 13:30:41 assinante conectado em broker.hivemq.com, topico guardario/v1/GR-SP-001/#
+13:30:45 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:30:48 guardario/v1/GR-SP-001/eventos {"estacao":"GR-SP-001","evento":"inicio","detalhe":"estacao ligada","uptimeS":3}
+13:31:03 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:32:06 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:32:22 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:33:33 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:33:36 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":1,"nivelCm":97,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-83,"uptimeS":10,"ts":1794501085,"motivo":"periodico"}
+13:33:51 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:34:57 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:35:13 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:36:18 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:36:34 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:36:48 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:36:48 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":2,"nivelCm":191,"chuvaMmH":12,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-88,"uptimeS":20,"ts":1794501095,"motivo":"periodico"}
+13:36:52 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":3,"nivelCm":254,"chuvaMmH":12,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-88,"uptimeS":23,"ts":1794501098,"motivo":"mudanca_risco"}
+13:36:52 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":4,"nivelCm":254,"chuvaMmH":12,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-88,"uptimeS":23,"ts":1794501098,"motivo":"periodico"}
+13:37:07 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":5,"nivelCm":254,"chuvaMmH":12,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-63,"uptimeS":33,"ts":1794501108,"motivo":"periodico"}
+13:37:22 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":6,"nivelCm":254,"chuvaMmH":12,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-86,"uptimeS":43,"ts":1794501118,"motivo":"periodico"}
+13:37:37 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":7,"nivelCm":254,"chuvaMmH":12,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-79,"uptimeS":53,"ts":1794501128,"motivo":"periodico"}
+13:37:52 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":8,"nivelCm":254,"chuvaMmH":12,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-90,"uptimeS":63,"ts":1794501138,"motivo":"periodico"}

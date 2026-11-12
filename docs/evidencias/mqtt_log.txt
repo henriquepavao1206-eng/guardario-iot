@@ -1,0 +1,110 @@
+# 2026-11-12 13:38:24 assinante conectado em broker.hivemq.com, topico guardario/v1/GR-SP-001/#
+13:38:24 guardario/v1/GR-SP-001/status [retain] {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:38:25 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":10,"nivelCm":254,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-82,"uptimeS":83,"ts":1794501158,"motivo":"periodico"}
+13:38:41 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":11,"nivelCm":254,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-92,"uptimeS":93,"ts":1794501168,"motivo":"periodico"}
+13:38:57 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":12,"nivelCm":254,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-81,"uptimeS":103,"ts":1794501178,"motivo":"periodico"}
+13:39:12 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":13,"nivelCm":254,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-99,"uptimeS":113,"ts":1794501188,"motivo":"periodico"}
+13:39:27 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:39:29 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:39:44 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:41:51 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:41:52 guardario/v1/GR-SP-001/eventos {"estacao":"GR-SP-001","evento":"inicio","detalhe":"estacao ligada","uptimeS":3}
+13:41:58 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":1,"nivelCm":97,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-99,"uptimeS":10,"ts":1794501715,"motivo":"periodico"}
+13:42:14 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":2,"nivelCm":97,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-61,"uptimeS":20,"ts":1794501725,"motivo":"periodico"}
+13:42:31 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":3,"nivelCm":97,"chuvaMmH":24,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-91,"uptimeS":30,"ts":1794501735,"motivo":"periodico"}
+13:42:47 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":4,"nivelCm":97,"chuvaMmH":24,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-89,"uptimeS":40,"ts":1794501745,"motivo":"periodico"}
+13:43:02 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":5,"nivelCm":97,"chuvaMmH":24,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-64,"uptimeS":50,"ts":1794501756,"motivo":"periodico"}
+13:43:17 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":6,"nivelCm":97,"chuvaMmH":24,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-91,"uptimeS":60,"ts":1794501766,"motivo":"periodico"}
+13:43:35 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":7,"nivelCm":97,"chuvaMmH":24,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-73,"uptimeS":70,"ts":1794501776,"motivo":"periodico"}
+13:43:51 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":8,"nivelCm":97,"chuvaMmH":24,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-92,"uptimeS":80,"ts":1794501786,"motivo":"periodico"}
+13:44:07 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":9,"nivelCm":97,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-82,"uptimeS":90,"ts":1794501796,"motivo":"periodico"}
+13:44:23 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":10,"nivelCm":97,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-62,"uptimeS":100,"ts":1794501806,"motivo":"periodico"}
+13:44:39 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:44:52 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:44:53 guardario/v1/GR-SP-001/eventos {"estacao":"GR-SP-001","evento":"inicio","detalhe":"estacao ligada","uptimeS":3}
+13:44:53 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":1,"nivelCm":97,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":0,"uptimeS":10,"ts":0,"motivo":"periodico"}
+13:45:03 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":2,"nivelCm":97,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-81,"uptimeS":20,"ts":1794501900,"motivo":"periodico"}
+13:45:19 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":3,"nivelCm":97,"chuvaMmH":12,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-72,"uptimeS":30,"ts":1794501911,"motivo":"periodico"}
+13:45:36 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":4,"nivelCm":97,"chuvaMmH":12,"temperaturaC":23.8,"umidadePct":91,"risco":"NORMAL","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-81,"uptimeS":40,"ts":1794501921,"motivo":"periodico"}
+13:45:51 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":5,"nivelCm":254,"chuvaMmH":12,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-85,"uptimeS":49,"ts":1794501930,"motivo":"mudanca_risco"}
+13:46:09 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":6,"nivelCm":254,"chuvaMmH":12,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":0,"rssi":-81,"uptimeS":59,"ts":1794501940,"motivo":"periodico"}
+13:46:16 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":7,"nivelCm":254,"chuvaMmH":60,"temperaturaC":23.8,"umidadePct":91,"risco":"ALERTA","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":18840,"rssi":-69,"uptimeS":63,"ts":1794501944,"motivo":"mudanca_risco"}
+13:46:33 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:46:39 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:46:40 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":8,"nivelCm":254,"chuvaMmH":72,"temperaturaC":23.8,"umidadePct":91,"risco":"ALERTA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":18840,"rssi":-98,"uptimeS":73,"ts":1794501954,"motivo":"periodico"}
+13:46:55 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:46:56 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:46:57 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":9,"nivelCm":254,"chuvaMmH":72,"temperaturaC":23.8,"umidadePct":91,"risco":"ALERTA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":18840,"rssi":-97,"uptimeS":83,"ts":1794501964,"motivo":"periodico"}
+13:47:12 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:47:14 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:47:14 guardario/v1/GR-SP-001/eventos {"estacao":"GR-SP-001","evento":"falha_sensor","detalhe":"HC-SR04 sem eco em 3 leituras seguidas","uptimeS":91}
+13:47:14 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":10,"nivelCm":null,"chuvaMmH":60,"temperaturaC":23.8,"umidadePct":91,"risco":"FALHA_SENSOR","sensorOk":false,"sirene":true,"silenciado":false,"tendenciaCmH":9420,"rssi":-85,"uptimeS":91,"ts":1794501972,"motivo":"mudanca_risco"}
+13:47:29 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:47:31 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:47:32 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":11,"nivelCm":null,"chuvaMmH":60,"temperaturaC":23.8,"umidadePct":91,"risco":"FALHA_SENSOR","sensorOk":false,"sirene":true,"silenciado":false,"tendenciaCmH":9420,"rssi":-90,"uptimeS":101,"ts":1794501982,"motivo":"periodico"}
+13:47:44 guardario/v1/GR-SP-001/eventos {"estacao":"GR-SP-001","evento":"sensor_recuperado","detalhe":"HC-SR04 voltou a responder","uptimeS":107}
+13:47:44 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":12,"nivelCm":254,"chuvaMmH":60,"temperaturaC":23.8,"umidadePct":91,"risco":"ALERTA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":9420,"rssi":-82,"uptimeS":107,"ts":1794501988,"motivo":"mudanca_risco"}
+13:48:02 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":13,"nivelCm":254,"chuvaMmH":60,"temperaturaC":23.8,"umidadePct":91,"risco":"ALERTA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":9420,"rssi":-95,"uptimeS":117,"ts":1794501998,"motivo":"periodico"}
+13:48:10 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":14,"nivelCm":254,"chuvaMmH":48,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":6278,"rssi":-98,"uptimeS":121,"ts":1794502002,"motivo":"mudanca_risco"}
+13:48:25 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:48:26 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:48:26 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":15,"nivelCm":254,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":6278,"rssi":-72,"uptimeS":131,"ts":1794502012,"motivo":"periodico"}
+13:48:41 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:48:43 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:48:43 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":16,"nivelCm":264,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ATENCAO","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":6278,"rssi":-94,"uptimeS":141,"ts":1794502022,"motivo":"periodico"}
+13:48:52 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":17,"nivelCm":304,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ALERTA","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":6278,"rssi":-93,"uptimeS":147,"ts":1794502028,"motivo":"mudanca_risco"}
+13:49:10 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":18,"nivelCm":304,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ALERTA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":6209,"rssi":-81,"uptimeS":157,"ts":1794502038,"motivo":"periodico"}
+13:49:30 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":19,"nivelCm":304,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ALERTA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":6209,"rssi":-71,"uptimeS":167,"ts":1794502048,"motivo":"periodico"}
+13:49:34 guardario/v1/GR-SP-001/comandos {"acao": "silenciar"}
+13:49:35 guardario/v1/GR-SP-001/eventos {"estacao":"GR-SP-001","evento":"silenciado","detalhe":"sirene silenciada por 10 min; LED vermelho continua","uptimeS":170}
+13:49:47 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":20,"nivelCm":304,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ALERTA","sensorOk":true,"sirene":false,"silenciado":true,"tendenciaCmH":6209,"rssi":-73,"uptimeS":177,"ts":1794502058,"motivo":"periodico"}
+13:50:04 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":21,"nivelCm":304,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ALERTA","sensorOk":true,"sirene":false,"silenciado":true,"tendenciaCmH":4967,"rssi":-77,"uptimeS":187,"ts":1794502068,"motivo":"periodico"}
+13:50:20 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":22,"nivelCm":337,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"ALERTA","sensorOk":true,"sirene":false,"silenciado":true,"tendenciaCmH":4967,"rssi":-92,"uptimeS":197,"ts":1794502078,"motivo":"periodico"}
+13:50:23 guardario/v1/GR-SP-001/eventos {"estacao":"GR-SP-001","evento":"silencio_cancelado","detalhe":"risco aumentou, sirene reativada","uptimeS":199}
+13:50:23 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":23,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":false,"silenciado":false,"tendenciaCmH":4967,"rssi":-80,"uptimeS":199,"ts":1794502080,"motivo":"mudanca_risco"}
+13:50:41 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:50:45 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:50:47 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":24,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":4967,"rssi":-83,"uptimeS":209,"ts":1794502090,"motivo":"periodico"}
+13:51:02 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:51:03 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:51:08 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":25,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":4959,"rssi":-71,"uptimeS":219,"ts":1794502100,"motivo":"periodico"}
+13:51:22 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:52:25 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:52:25 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":26,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":4959,"rssi":-73,"uptimeS":229,"ts":1794502110,"motivo":"periodico"}
+13:52:25 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":27,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":4959,"rssi":-73,"uptimeS":239,"ts":1794502120,"motivo":"periodico"}
+13:52:25 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":28,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":4251,"rssi":-73,"uptimeS":249,"ts":1794502130,"motivo":"periodico"}
+13:52:25 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":29,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":4251,"rssi":-73,"uptimeS":260,"ts":1794502140,"motivo":"periodico"}
+13:52:38 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":30,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":4251,"rssi":-72,"uptimeS":270,"ts":1794502150,"motivo":"periodico"}
+13:52:54 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:53:23 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:53:24 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":31,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":3719,"rssi":-76,"uptimeS":280,"ts":1794502160,"motivo":"periodico"}
+13:53:24 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":32,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":3719,"rssi":-86,"uptimeS":290,"ts":1794502170,"motivo":"periodico"}
+13:53:37 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":33,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":3305,"rssi":-81,"uptimeS":300,"ts":1794502180,"motivo":"periodico"}
+13:53:53 guardario/v1/GR-SP-001/comandos {"acao": "cotas", "atencaoCm": 300, "alertaCm": 250, "transbordoCm": 340}
+13:53:54 guardario/v1/GR-SP-001/eventos {"estacao":"GR-SP-001","evento":"cotas_rejeitadas","detalhe":"cotas rejeitadas (300,250,340): exigem 0 < atencao < alerta < transbordo <= 400","uptimeS":307}
+13:54:01 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":34,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":3305,"rssi":-89,"uptimeS":310,"ts":1794502191,"motivo":"periodico"}
+13:54:03 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":35,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":3305,"rssi":-84,"uptimeS":311,"ts":1794502192,"motivo":"comando_status"}
+13:54:23 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":36,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":3305,"rssi":-61,"uptimeS":320,"ts":1794502201,"motivo":"periodico"}
+13:54:30 guardario/v1/GR-SP-001/comandos {"acao": "cotas", "atencaoCm": 200, "alertaCm": 260, "transbordoCm": 320}
+13:54:31 guardario/v1/GR-SP-001/eventos {"estacao":"GR-SP-001","evento":"cotas_atualizadas","detalhe":"atencao=200 alerta=260 transbordo=320","uptimeS":323}
+13:54:44 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":37,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":1213,"rssi":-68,"uptimeS":330,"ts":1794502211,"motivo":"periodico"}
+13:54:48 guardario/v1/GR-SP-001/comandos {"acao": "cotas", "atencaoCm": 250, "alertaCm": 300, "transbordoCm": 340}
+13:54:49 guardario/v1/GR-SP-001/eventos {"estacao":"GR-SP-001","evento":"cotas_atualizadas","detalhe":"atencao=250 alerta=300 transbordo=340","uptimeS":332}
+13:55:04 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:55:06 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:55:06 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":38,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":1213,"rssi":-89,"uptimeS":340,"ts":1794502221,"motivo":"periodico"}
+13:55:21 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:55:22 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:55:28 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":39,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":1213,"rssi":-93,"uptimeS":350,"ts":1794502231,"motivo":"periodico"}
+13:55:43 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:55:45 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:55:49 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":40,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":1213,"rssi":-96,"uptimeS":360,"ts":1794502241,"motivo":"periodico"}
+13:56:05 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:56:07 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:56:12 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":41,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":1213,"rssi":-96,"uptimeS":370,"ts":1794502251,"motivo":"periodico"}
+13:56:28 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"offline"}
+13:56:29 guardario/v1/GR-SP-001/status {"estacao":"GR-SP-001","estado":"online","ip":"10.10.0.2"}
+13:56:29 guardario/v1/GR-SP-001/eventos {"estacao":"GR-SP-001","evento":"inicio","detalhe":"estacao ligada","uptimeS":3}
+13:56:29 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":1,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":0,"rssi":0,"uptimeS":3,"ts":0,"motivo":"mudanca_risco"}
+13:56:41 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":2,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":0,"rssi":-89,"uptimeS":13,"ts":1794502592,"motivo":"periodico"}
+13:57:00 guardario/v1/GR-SP-001/telemetria {"estacao":"GR-SP-001","seq":3,"nivelCm":345,"chuvaMmH":0,"temperaturaC":23.8,"umidadePct":91,"risco":"EMERGENCIA","sensorOk":true,"sirene":true,"silenciado":false,"tendenciaCmH":0,"rssi":-72,"uptimeS":23,"ts":1794502602,"motivo":"periodico"}
