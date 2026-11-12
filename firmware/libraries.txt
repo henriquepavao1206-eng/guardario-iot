@@ -1,0 +1,5 @@
+# Bibliotecas do projeto Wokwi (instaladas automaticamente pelo simulador)
+PubSubClient
+ArduinoJson
+LiquidCrystal I2C
+DHT sensor library for ESPx

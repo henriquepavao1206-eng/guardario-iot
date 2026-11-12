@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "author": "GuardaRio - Henrique Pavao, Raphael Mendonca, Arthur Belarmino",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "nivel",
+      "top": -171.3,
+      "left": -186.5,
+      "attrs": { "distance": "300" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "pluviometro",
+      "top": 236.6,
+      "left": -192,
+      "attrs": { "color": "blue", "label": "Pluviometro (tecla C)", "key": "c" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht",
+      "top": -153.3,
+      "left": 129,
+      "attrs": { "temperature": "23.8", "humidity": "91" }
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd",
+      "top": -147.2,
+      "left": 264.8,
+      "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_verde",
+      "top": 54,
+      "left": 253.4,
+      "attrs": { "color": "limegreen", "label": "NORMAL" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_amarelo",
+      "top": 54,
+      "left": 301.4,
+      "attrs": { "color": "yellow", "label": "ATENCAO" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_vermelho",
+      "top": 54,
+      "left": 349.4,
+      "attrs": { "color": "red", "label": "ALERTA" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_verde",
+      "top": 157.55,
+      "left": 192,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_amarelo",
+      "top": 176.75,
+      "left": 192,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r_vermelho",
+      "top": 195.95,
+      "left": 192,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "sirene",
+      "top": 232.8,
+      "left": 290.4,
+      "attrs": { "volume": "0.2" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "botao",
+      "top": 313.4,
+      "left": -192,
+      "attrs": { "color": "red", "label": "Teste / Silencio (tecla S)", "key": "s" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+
+    [ "nivel:VCC", "esp:5V", "red", [ "v0" ] ],
+    [ "nivel:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "nivel:TRIG", "esp:5", "orange", [ "v0" ] ],
+    [ "nivel:ECHO", "esp:18", "purple", [ "v0" ] ],
+
+    [ "pluviometro:1.r", "esp:4", "blue", [ "h0" ] ],
+    [ "pluviometro:2.r", "esp:GND.2", "black", [ "h0" ] ],
+
+    [ "dht:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "dht:SDA", "esp:15", "green", [ "v0" ] ],
+
+    [ "lcd:VCC", "esp:5V", "red", [ "h0" ] ],
+    [ "lcd:GND", "esp:GND.2", "black", [ "h0" ] ],
+    [ "lcd:SDA", "esp:21", "green", [ "h0" ] ],
+    [ "lcd:SCL", "esp:22", "gold", [ "h0" ] ],
+
+    [ "esp:25", "r_verde:1", "limegreen", [ "h0" ] ],
+    [ "r_verde:2", "led_verde:A", "limegreen", [ "v0" ] ],
+    [ "led_verde:C", "esp:GND.3", "black", [ "v0" ] ],
+
+    [ "esp:26", "r_amarelo:1", "yellow", [ "h0" ] ],
+    [ "r_amarelo:2", "led_amarelo:A", "yellow", [ "v0" ] ],
+    [ "led_amarelo:C", "esp:GND.3", "black", [ "v0" ] ],
+
+    [ "esp:27", "r_vermelho:1", "red", [ "h0" ] ],
+    [ "r_vermelho:2", "led_vermelho:A", "red", [ "v0" ] ],
+    [ "led_vermelho:C", "esp:GND.3", "black", [ "v0" ] ],
+
+    [ "esp:13", "sirene:2", "magenta", [ "h0" ] ],
+    [ "sirene:1", "esp:GND.3", "black", [ "v0" ] ],
+
+    [ "botao:1.r", "esp:19", "red", [ "h0" ] ],
+    [ "botao:2.r", "esp:GND.1", "black", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}
