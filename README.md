@@ -327,24 +327,38 @@ python -m pytest -q
 
 ### 6.1 Testes funcionais do protótipo (T1 a T10)
 
-O passo a passo detalhado de cada teste, com o que fotografar, está em [`docs/TESTES.md`](docs/TESTES.md). As evidências (print do Wokwi com o Serial Monitor e o HiveMQ lado a lado) ficam em [`docs/evidencias/`](docs/evidencias/).
+O passo a passo detalhado de cada teste, com o que fotografar, está em [`docs/TESTES.md`](docs/TESTES.md). As evidências (prints do Wokwi com LCD, LEDs e Serial Monitor, mais o log das mensagens recebidas pela nuvem) ficam em [`docs/evidencias/`](docs/evidencias/).
+
+Executados em **12/11/2026** no projeto público do Wokwi. O lado da nuvem foi registrado por um assinante MQTT em `guardario/v1/GR-SP-001/#` no broker HiveMQ ([`docs/evidencias/mqtt_log.txt`](docs/evidencias/mqtt_log.txt)), e os comandos da nuvem foram enviados com [`ponte/comando.py`](ponte/comando.py).
+
+> **Calibração observada:** no Wokwi o HC-SR04 lê cerca de 3 cm a mais (300 cm → nível 97). Por isso os testes usam distâncias com folga da cota: 145 cm (nível 254), 95 cm (304) e 55 cm (345).
 
 | # | Procedimento | Resultado esperado | Observado | Evidência | Status |
 |---|---|---|---|---|---|
-| T1 | HC-SR04 em 300 cm (nível 100, abaixo da atenção) | LED verde, LCD `NORMAL`, telemetria com `"risco":"NORMAL"` | | `T1.png` | A EXECUTAR |
-| T2 | HC-SR04 em 150 cm (nível 250, cota de atenção) | LED amarelo, sem sirene | | `T2.png` | A EXECUTAR |
-| T3 | HC-SR04 em 100 cm (nível 300, cota de alerta) | LED vermelho e sirene intermitente; mensagem imediata com `"motivo":"mudanca_risco"` | | `T3.png` | A EXECUTAR |
-| T4 | HC-SR04 em 60 cm (nível 340, cota de transbordo) | Sirene rápida, LCD `EMERGENCIA` | | `T4.png` | A EXECUTAR |
-| T5 | Nível de atenção (150 cm) e 5 pulsos rápidos no pluviômetro (≈ 60 mm/h) | Risco sobe para `ALERTA`; após 1 min sem chuva volta a `ATENCAO` | | `T5.png` | A EXECUTAR |
-| T6 | Uma pressão longa (3 s) no botão do pluviômetro | Conta **um único pulso** (`[CHUVA] +1 pulso(s)`) | | `T6.png` | A EXECUTAR |
-| T7 | Com nível em ALERTA, digitar `wifi off` no Serial; depois `wifi on` | Sirene continua; LCD `W-M-`; mensagens `- na fila`; ao religar, reconexão e envio da fila | | `T7.png` | A EXECUTAR |
-| T8 | Digitar `mqtt off` com o HiveMQ assinando `.../status` | Em até ~15 s o HiveMQ recebe `{"estado":"offline"}` (LWT); `mqtt on` volta para `online` | | `T8.png` | A EXECUTAR |
-| T9 | Digitar `falha on` (ou remover o fio do ECHO) | Após 3 leituras: LCD `FALHA SENSOR`, `"nivelCm":null`, `"risco":"FALHA_SENSOR"`; nenhuma leitura de nível zero | | `T9.png` | A EXECUTAR |
-| T10 | Com sirene em ALERTA, publicar `{"acao":"silenciar"}` no HiveMQ | Sirene silenciada por 10 min, LED vermelho continua, LCD mostra `S`, evento `silenciado` em `.../eventos` | | `T10.png` | A EXECUTAR |
-| T11 | Silenciado em ALERTA, subir o nível até EMERGÊNCIA | Silêncio cancelado na hora (evento `silencio_cancelado`) | | `T11.png` | A EXECUTAR |
-| T12 | Publicar `{"acao":"cotas","atencaoCm":300,"alertaCm":250,"transbordoCm":340}` | Rejeitado pela RN10 (evento `cotas_rejeitadas`), cotas antigas mantidas | | `T12.png` | A EXECUTAR |
+| T1 | HC-SR04 em 300 cm | LED verde, LCD `NORMAL`, telemetria com `"risco":"NORMAL"` | Nível 97 cm, LED verde, LCD `NORMAL W+M+`; `seq 1` `NORMAL` recebida pelo assinante às 13:41:58 | `T1.jpg` | CONCLUÍDO |
+| T2 | HC-SR04 em 145 cm | LED amarelo, sem sirene, mensagem imediata | `[RISCO] NORMAL -> ATENCAO (nivel 254 cm)`, `"motivo":"mudanca_risco"`, `"sirene":false` | `T2.jpg` | CONCLUÍDO |
+| T3 | HC-SR04 em 95 cm (sem chuva) | LED vermelho e sirene intermitente | `ATENCAO -> ALERTA (nivel 304 cm, chuva 0.0)`, LED vermelho, buzzer com sinal, periódica com `"sirene":true` | `T3.jpg` | CONCLUÍDO |
+| T4 | HC-SR04 em 55 cm | Sirene rápida, LCD `EMERGENCIA` | `ALERTA -> EMERGENCIA (nivel 345 cm)`, LCD `EMERGENCIA`, `"sirene":true` | `T4.jpg` | CONCLUÍDO |
+| T5 | Nível 254 cm e 5 pulsos rápidos no pluviômetro | Sobe para `ALERTA`; sem chuva volta a `ATENCAO` | `[CHUVA] ... -> 60.0 mm/h` e `ATENCAO -> ALERTA (nivel 254 cm, chuva 60.0)`; ~60 s depois `ALERTA -> ATENCAO (chuva 48.0)` | `T5.jpg` | CONCLUÍDO |
+| T6 | Segurar o botão do pluviômetro por ~3 s | Conta **um único pulso** | 1ª execução: **2 pulsos** (falha, ver abaixo). Após a correção: segurado 3,1 s → `[CHUVA] +1 pulso(s) -> 12.0 mm/h` | `T6.jpg`, `T6_falha_antes_da_correcao.jpg` | CONCLUÍDO após correção |
+| T7 | Em EMERGÊNCIA, `wifi off`; depois `wifi on` | Sirene continua; fila; reenvio ao religar | Sirene e LED vermelho ativos, LCD `W-M-`, seq 26–29 `na fila`; LWT `offline` às 13:51:22; com `wifi on`, seq 26–29 entregues juntas às 13:52:25, sem buracos | `T7_wifi_off.jpg`, `T7_wifi_on_fila_enviada.jpg` | CONCLUÍDO |
+| T8 | `mqtt off`; depois `mqtt on` | Broker publica o LWT `offline`; volta `online` | LWT `{"estado":"offline"}` às 13:52:54; `online` às 13:53:23 e fila (seq 31–32) entregue | `T8.jpg` | CONCLUÍDO |
+| T9 | `falha on`; depois `falha off` | `FALHA SENSOR`, `nivelCm:null`, nunca zero | Evento `falha_sensor`, LCD `FALHA SENSOR / VERIFICAR`, `"nivelCm":null`, `"risco":"FALHA_SENSOR"`, sirene mantida (*fail-safe*); `sensor_recuperado` ao desligar | `T9.jpg` | CONCLUÍDO |
+| T10 | Em ALERTA, publicar `{"acao":"silenciar"}` | Sirene silenciada, LED continua, `S` no LCD | Comando às 13:49:34 → evento `silenciado` às 13:49:35; `"sirene":false,"silenciado":true`, LCD `ALERTA S`, LED vermelho aceso | `T10.jpg` | CONCLUÍDO |
+| T11 | Silenciado, subir para EMERGÊNCIA | Silêncio cancelado | Evento `silencio_cancelado` e `ALERTA -> EMERGENCIA` no mesmo ciclo, `"silenciado":false` | `T11.jpg` | CONCLUÍDO |
+| T12 | Cotas 300/250/340; depois 200/260/320 | Rejeita a inválida; aceita a válida | `cotas_rejeitadas` e `status` mostra `cotas=250/300/340`; depois `cotas_atualizadas` (200/260/320) e volta ao padrão (250/300/340) | `T12.jpg` | CONCLUÍDO |
 
-> Preencha **Observado** e **Status** (`CONCLUÍDO`, `FALHA` ou `NÃO EXECUTADO` com motivo) depois de rodar no Wokwi.
+#### Problemas encontrados pelos testes e corrigidos
+
+| Achado | Teste | Causa | Correção |
+|---|---|---|---|
+| Pressão longa no pluviômetro contava **2 pulsos** | T6 | A interrupção lia o nível do pino; na soltura, se a interrupção atrasasse durante a trepidação, lia LOW e contava pulso falso | A interrupção só marca a hora da borda; o pulso conta quando o sinal fica **estável por 50 ms** na transição HIGH → LOW (`verificarPluviometro()`) |
+| Envio periódico duplicado logo após mudança de risco | T2 (1ª execução) | `tTelemetria = millis()` maior que o `agora` do loop; a subtração sem sinal virava um número enorme | `tTelemetria = tLeitura` (mesmo relógio do loop) |
+| Campo `sirene` atrasado na mensagem `mudanca_risco` | T3, T5, T11 | A telemetria era montada antes de a sirene ser atualizada no loop | `atualizarSirene()` chamada antes de publicar a mudança |
+
+#### Comportamento observado sob simulação lenta
+
+Quando o simulador cai para menos de ~40% da velocidade real, o broker derruba a estação pelo *keepalive* (contado em tempo real) e ela reconecta sozinha em poucos segundos. Durante essas quedas, nenhuma telemetria foi perdida: na execução principal dos testes, as **41 mensagens (seq 1 a 41) chegaram ao assinante sem buracos e sem duplicadas**, porque a fila guarda as mensagens até a reconexão (conferido por script sobre o `mqtt_log.txt`). Ver [`mqtt_log_reconexao_simulacao_lenta.txt`](docs/evidencias/mqtt_log_reconexao_simulacao_lenta.txt).
 
 ### 6.2 Testes automatizados da ponte (executados)
 
