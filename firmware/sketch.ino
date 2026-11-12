@@ -184,9 +184,11 @@ int  freqAtual = 0;
 
 uint32_t seq = 0;
 
-// Pluviometro: contagem por interrupcao + baldes de 2 s
-volatile uint32_t pulsosChuva = 0;
+// Pluviometro: interrupcao marca a borda; o pulso conta quando o sinal estabiliza
 volatile unsigned long ultimaBordaUs = 0;
+volatile bool bordaPendente = false;
+bool estadoChuvaEstavel = HIGH;   // INPUT_PULLUP: solto = HIGH
+uint32_t pulsosChuva = 0;
 const int NUM_BALDES = JANELA_CHUVA_S * 1000 / INTERVALO_LEITURA_MS;  // 30
 uint16_t baldes[NUM_BALDES];
 int idxBalde = 0;
@@ -208,18 +210,29 @@ unsigned long botaoUltimaMudanca = 0;
 bool botaoEstavel = HIGH;
 
 // =====================================================================
-// Interrupcao do pluviometro com debounce
-// Conta um pulso apenas na borda de descida que vem depois de 50 ms de
-// sinal estavel. O ruido mecanico (na pressao e na soltura) gera bordas
-// com poucos ms de intervalo e e ignorado. Pressao longa = 1 pulso (T6).
+// Pluviometro: interrupcao + debounce por estabilidade
+// A interrupcao (CHANGE) so registra QUANDO houve borda. O loop espera o
+// sinal ficar 50 ms sem mudar e so entao le o nivel: conta um pulso na
+// transicao estavel HIGH -> LOW. O ruido mecanico da pressao e da soltura
+// (varias bordas em poucos ms) nunca e lido no meio. Pressao longa = 1
+// pulso (T6). Versao anterior lia o pino dentro da interrupcao e contava
+// pulso falso na soltura quando a interrupcao atrasava (achado no T6).
 // =====================================================================
 void IRAM_ATTR isrChuva() {
-  unsigned long agora = micros();
-  bool baixo = digitalRead(PINO_CHUVA) == LOW;
-  if (baixo && (agora - ultimaBordaUs) > 50000UL) {
-    pulsosChuva++;
-  }
-  ultimaBordaUs = agora;
+  ultimaBordaUs = micros();
+  bordaPendente = true;
+}
+
+void verificarPluviometro() {
+  noInterrupts();
+  bool pendente = bordaPendente;
+  unsigned long borda = ultimaBordaUs;
+  interrupts();
+  if (!pendente || micros() - borda < 50000UL) return;  // ainda trepidando
+  bordaPendente = false;
+  bool nivel = digitalRead(PINO_CHUVA);
+  if (nivel == LOW && estadoChuvaEstavel == HIGH) pulsosChuva++;  // bascula virou
+  estadoChuvaEstavel = nivel;
 }
 
 // =====================================================================
@@ -411,10 +424,8 @@ void lerNivel() {
 }
 
 void lerChuva() {
-  noInterrupts();
   uint32_t novos = pulsosChuva;
   pulsosChuva = 0;
-  interrupts();
 
   // Janela movel: tira o balde mais antigo e coloca o novo
   totalPulsos -= baldes[idxBalde];
@@ -684,8 +695,9 @@ void cicloDeMedicao() {
     Serial.printf("[RISCO] %s -> %s (nivel %d cm, chuva %.1f mm/h)\n",
                   nomeRisco(riscoPublicado), nomeRisco(riscoAtual), nivelCm, chuvaMmH);
     riscoPublicado = riscoAtual;
+    atualizarSirene(millis());  // sirene ja no estado novo antes de montar a mensagem
     publicarTelemetria("mudanca_risco");
-    tTelemetria = millis();
+    tTelemetria = tLeitura;  // mesmo relogio do loop (evita envio periodico duplicado)
   }
 }
 
@@ -760,6 +772,7 @@ void loop() {
     processarComando(c.json);
   }
 
+  verificarPluviometro();
   lerBotao(agora);
   lerSerial();
   atualizarSirene(agora);
