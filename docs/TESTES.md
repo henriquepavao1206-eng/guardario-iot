@@ -9,15 +9,16 @@
 
 > **Média móvel:** o nível é a média das últimas 5 leituras (uma a cada 2 s). Depois de mexer no HC-SR04, espere **cerca de 10 s** para o nível estabilizar. Isso é proposital: filtra ondas e ruído. Uma mudança brusca de 300 para 100 cm passa por ATENÇÃO antes de chegar a ALERTA (dá para mostrar isso na apresentação).
 
-Conversão distância → nível (altura de instalação = 400 cm):
+Conversão distância → nível (altura de instalação = 400 cm). No Wokwi o HC-SR04 lê **cerca de 3 cm a mais** que o valor do controle (300 cm → nível 97), então use as distâncias com folga da coluna "Usar":
 
-| Distância no HC-SR04 | Nível | Risco esperado (sem chuva) |
+| Usar no HC-SR04 | Nível observado | Risco esperado (sem chuva) |
 |---|---|---|
-| 300 cm | 100 cm | NORMAL |
-| 151 cm | 249 cm | NORMAL (1 cm abaixo da cota) |
-| 150 cm | 250 cm | ATENÇÃO |
-| 100 cm | 300 cm | ALERTA |
-| 60 cm | 340 cm | EMERGÊNCIA |
+| 300 cm | 97 cm | NORMAL |
+| 145 cm | 254 cm | ATENÇÃO |
+| 95 cm | 304 cm | ALERTA |
+| 55 cm | 345 cm | EMERGÊNCIA |
+
+> Valores exatamente na cota (150, 100, 60 cm) ficam 2–3 cm abaixo dela por esse desvio. Num sensor real, a altura de instalação é calibrada medindo a distância até uma régua de referência.
 
 ---
 
