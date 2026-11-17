@@ -249,7 +249,7 @@ sequenceDiagram
     P->>P: valida, deduplica por seq, confere a régua
     P->>A: POST /api/estacoes/1/leituras (Bearer JWT)
     A->>A: mesma régua + RN02: abre alerta automático
-    A-->>P: 201 Created (nivelRisco ALERTA, alertaGeradoId 17)
+    A-->>P: 201 Created (leitura.nivelRisco ALERTA, alertaGeradoId 17)
     U->>A: GET /api/alertas/ativos
     A-->>U: banner do alerta e abrigos com vaga
     Note over E,B: se a estação cair, o broker publica o LWT "offline" em .../status
@@ -310,9 +310,20 @@ cp .env.example .env        # Windows: copy .env.example .env
 |---|---|
 | **Só registrar (sem API)** | `MODO=dry-run` no `.env` e `python ponte_mqtt_api.py`. Gera `saida/leituras.csv` e `saida/metricas.json`. |
 | **Com a API simulada** (teste local) | Terminal 1: `python api_mock.py`. Terminal 2: no `.env`, `MODO=api`, `API_URL=http://localhost:8080`, `API_SENHA=qualquer` e `python ponte_mqtt_api.py`. |
-| **Com a API Java na Azure** (demonstração) | `MODO=api`, `API_URL=http://IP-PUBLICO-DA-VM:8080`, `API_EMAIL`/`API_SENHA` de um usuário **AGENTE**, `ESTACOES=GR-SP-001:<id da estação na API>`. |
+| **Com a API Java na Azure** (demonstração) | `MODO=api`, `API_URL=http://IP-PUBLICO-DA-VM:8080`, `API_EMAIL`/`API_SENHA` de um usuário **AGENTE**, `ESTACOES=GR-SP-001:<id da estação na API>`. No perfil `dev` da [API Java](https://github.com/Raphael-Sinelli/guardario-api), a carga de demonstração já cria o AGENTE `agente@guardario.com` e a estação `GR-SP-001` com id 1. |
 | **Sem o Wokwi** | `python simulador_estacao.py` publica uma cheia completa (NORMAL → EMERGÊNCIA). `--estacoes 20` simula 20 estações. |
 | **Comandos** | `python comando.py silenciar` · `python comando.py testar_sirene` · `python comando.py cotas 240 290 330` |
+
+**Contrato com a API Java** (conferido no código de [`guardario-api`](https://github.com/Raphael-Sinelli/guardario-api)):
+
+| Ponto | API Java | Como a ponte trata |
+|---|---|---|
+| Login | `POST /api/auth/login` com `{"email","senha"}` → `AuthResponse` com `token` (vale 1 h) | Guarda o JWT; no 401, faz login de novo e repete uma vez |
+| Leitura | `POST /api/estacoes/{id}/leituras` (papel AGENTE ou ADMIN) com `nivelCm` (inteiro), `chuvaMmH`, `temperaturaC`, `umidadePct`, `medidaEm` (ISO 8601 UTC) | Mesmos nomes e tipos; a API não converte tipos (`allow-coercion-of-scalars: false`) |
+| Resposta 201 | `LeituraRegistradaResponse`: `leitura.nivelRisco`, `areaId`, `nivelArea`, `nivelAreaAlterado`, `alertaGeradoId` | Registra o risco e, se veio `alertaGeradoId`, conta o alerta automático |
+| `medidaEm` no futuro | 400 (sem tolerância) | Se o relógio da estação estiver adiantado, usa a hora em que a ponte recebeu |
+| Leitura repetida | 409 "Leitura já registrada" (mesmo `medidaEm` e mesmas medidas) | Não é erro: a leitura já está salva (reenvio da fila); conta em `jaRegistradasApi` |
+| Estação em MANUTENCAO/INATIVA | 409 | Erro definitivo, não fica tentando |
 
 ### 5.4 Testes automatizados da ponte
 
@@ -362,14 +373,14 @@ Quando o simulador cai para menos de ~40% da velocidade real, o broker derruba a
 
 ### 6.2 Testes automatizados da ponte (executados)
 
-`python -m pytest -q` → **41 testes, todos passando** (`41 passed`).
+`python -m pytest -q` → **45 testes, todos passando** (`45 passed`).
 
 | Arquivo | O que prova |
 |---|---|
 | `tests/test_regua.py` | A régua RN01 da ponte dá o mesmo resultado dos testes T1–T5 (inclusive os limites exatos: 249 → NORMAL, 250 → ATENÇÃO; 49,9 mm/h não agrava, 50 agrava) e a RN10 rejeita cotas fora de ordem |
-| `tests/test_telemetria.py` | O payload do documento é aceito; JSON inválido, risco desconhecido, valores fora da faixa e `sensorOk:true` sem nível são rejeitados; falha de sensor **nunca** vira nível zero |
+| `tests/test_telemetria.py` | O payload do documento é aceito; JSON inválido, risco desconhecido, valores fora da faixa e `sensorOk:true` sem nível são rejeitados; falha de sensor **nunca** vira nível zero; `medidaEm` nunca sai no futuro |
 | `tests/test_metricas.py` | Cálculo da taxa de entrega por buracos no `seq`, duplicadas, reinício da estação e disponibilidade pelo LWT |
-| `tests/test_ponte_integracao.py` | Fluxo completo ponte → API simulada: alerta aberto **uma vez** em ALERTA e substituído em EMERGÊNCIA (RN02); duplicada e falha de sensor não chegam à API; API fora do ar manda a leitura para a fila de reenvio |
+| `tests/test_ponte_integracao.py` | Fluxo completo ponte → API simulada: alerta aberto **uma vez** em ALERTA e substituído em EMERGÊNCIA (RN02); duplicada e falha de sensor não chegam à API; API fora do ar manda a leitura para a fila de reenvio; a resposta tem o formato da API Java; o 409 de leitura já gravada não conta como erro |
 
 ### 6.3 Métricas e critérios adotados
 
@@ -488,7 +499,7 @@ guardario-iot/
 │   ├── comando.py               ← envia comandos para a estação
 │   ├── requirements.txt
 │   ├── .env.example             ← configuração de exemplo, sem credenciais
-│   └── tests/                   ← 41 testes automatizados (pytest)
+│   └── tests/                   ← 45 testes automatizados (pytest)
 └── docs/
     ├── TESTES.md                ← roteiro detalhado dos testes T1 a T12
     ├── APRESENTACAO.md          ← roteiro da demo e respostas às perguntas
