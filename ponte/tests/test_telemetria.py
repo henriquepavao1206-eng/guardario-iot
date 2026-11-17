@@ -63,3 +63,12 @@ def test_topico():
     assert codigo_do_topico("guardario/v1/GR-SP-001/telemetria") == ("GR-SP-001", "telemetria")
     with pytest.raises(TelemetriaInvalida):
         codigo_do_topico("outro/GR-SP-001/telemetria")
+
+
+def test_medida_em_nunca_no_futuro():
+    from datetime import datetime, timedelta, timezone
+    agora = datetime(2026, 11, 17, 12, 0, tzinfo=timezone.utc)
+    t = ler_telemetria(msg(ts=int((agora + timedelta(seconds=30)).timestamp())))
+    assert t.medida_em(agora) == agora
+    t = ler_telemetria(msg(ts=int((agora - timedelta(seconds=5)).timestamp())))
+    assert t.medida_em(agora) == agora - timedelta(seconds=5)

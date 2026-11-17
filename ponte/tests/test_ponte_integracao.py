@@ -90,3 +90,33 @@ def test_estacao_falsificada_no_payload_e_rejeitada(tmp_path):
     p = ponte_para("http://x", tmp_path, modo="dry-run")
     p.processar(TOPICO, telemetria(1, 120, estacao="GR-SP-999"), time.time())
     assert p.metricas.invalidas == 1
+
+
+def test_reenvio_de_leitura_ja_gravada_nao_conta_como_erro(api, tmp_path):
+    # API Java: mesma leitura (mesmo medidaEm e medidas) de novo = 409 "Leitura ja registrada"
+    p = ponte_para(api, tmp_path)
+    corpo = {"nivelCm": 305, "chuvaMmH": 0.0, "temperaturaC": 23.8, "umidadePct": 91,
+             "medidaEm": "2026-11-17T10:00:00Z"}
+    p._enviar("GR-SP-001", 1, dict(corpo), tentativas=0)
+    p._enviar("GR-SP-001", 1, dict(corpo), tentativas=0)       # reenvio (ex.: resposta perdida)
+    assert len(api_mock.leituras) == 1
+    assert p.metricas.enviadas_api == 1
+    assert p.metricas.ja_registradas_api == 1
+    assert p.metricas.erros_api == 0
+
+
+def test_relogio_da_estacao_adiantado_nao_gera_400(api, tmp_path):
+    # API Java recusa medidaEm no futuro; a ponte usa a hora do recebimento
+    p = ponte_para(api, tmp_path)
+    p.processar(TOPICO, telemetria(1, 120, ts=int(time.time()) + 120), time.time())
+    assert p.metricas.erros_api == 0
+    assert len(api_mock.leituras) == 1
+
+
+def test_resposta_no_formato_da_api_java(api, tmp_path):
+    p = ponte_para(api, tmp_path)
+    resposta, _ = p.api.enviar_leitura(1, {"nivelCm": 345, "chuvaMmH": 0.0, "temperaturaC": None,
+                                           "umidadePct": None, "medidaEm": "2026-11-17T10:00:00Z"})
+    assert resposta["leitura"]["nivelRisco"] == "EMERGENCIA"
+    assert resposta["alertaGeradoId"] == 1
+    assert {"areaId", "nivelArea", "nivelAreaAlterado"} <= resposta.keys()
