@@ -2,7 +2,9 @@
 
 Imita os dois endpoints que a ponte usa, com a mesma regra RN01/RN02:
     POST /api/auth/login
-    POST /api/estacoes/{id}/leituras   -> 201 com nivelRisco e alertaGeradoId
+    POST /api/estacoes/{id}/leituras   -> 201 no formato LeituraRegistradaResponse
+                                          (leitura.nivelRisco, nivelArea, alertaGeradoId);
+                                          409 para leitura repetida; 400 para medidaEm no futuro
     GET  /api/alertas/ativos
 
 Permite demonstrar estacao -> broker -> ponte -> "API" mesmo antes da
@@ -24,10 +26,23 @@ leituras: list[dict] = []
 alertas: list[dict] = []
 
 
+MEDIDAS = ("nivelCm", "chuvaMmH", "temperaturaC", "umidadePct", "medidaEm")
+
+
+class LeituraRepetida(Exception):
+    pass
+
+
 def _registrar_leitura(estacao_id: int, corpo: dict) -> dict:
+    """Mesmo formato do LeituraRegistradaResponse da API Java."""
     risco = classificar(corpo["nivelCm"], corpo.get("chuvaMmH") or 0)
     with _lock:
-        leitura = {"id": len(leituras) + 1, "estacaoId": estacao_id, **corpo, "nivelRisco": risco}
+        # como a API Java: mesma estacao, mesmo medidaEm e mesmas medidas = 409
+        if corpo.get("medidaEm") and any(
+                l["estacaoId"] == estacao_id and all(l.get(k) == corpo.get(k) for k in MEDIDAS) for l in leituras):
+            raise LeituraRepetida(corpo["medidaEm"])
+        leitura = {"id": len(leituras) + 1, "estacaoId": estacao_id,
+                   **{k: corpo.get(k) for k in MEDIDAS}, "nivelRisco": risco}
         leituras.append(leitura)
         alerta_id = None
         # RN02: risco >= ALERTA abre alerta se nao houver ativo de nivel igual ou maior
@@ -40,7 +55,9 @@ def _registrar_leitura(estacao_id: int, corpo: dict) -> dict:
                 alertas.append({"id": alerta_id, "estacaoId": estacao_id, "nivel": risco, "status": "ATIVO",
                                 "origem": "AUTOMATICO",
                                 "emitidoEm": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")})
-    return {**leitura, "alertaGeradoId": alerta_id}
+    return {"leitura": leitura, "areaId": 1, "nivelArea": risco, "nivelAreaAlterado": True,
+            "alertaGeradoId": alerta_id,
+            "_links": {"self": {"href": f"/api/estacoes/{estacao_id}/leituras/{leitura['id']}"}}}
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -60,16 +77,25 @@ class Handler(BaseHTTPRequestHandler):
         if self.path == "/api/auth/login":
             c = self._corpo()
             if c.get("email") and c.get("senha"):
-                return self._json(200, {"token": TOKEN, "tipo": "Bearer"})
+                return self._json(200, {"token": TOKEN, "tipoToken": "Bearer", "expiraEmSegundos": 3600,
+                                        "email": c["email"], "papel": "AGENTE"})
             return self._json(401, {"mensagem": "credenciais invalidas"})
         m = re.fullmatch(r"/api/estacoes/(\d+)/leituras", self.path)
         if m:
             if self.headers.get("Authorization") != f"Bearer {TOKEN}":
                 return self._json(401, {"mensagem": "token ausente ou invalido"})
             c = self._corpo()
-            if not isinstance(c.get("nivelCm"), (int, float)):
-                return self._json(400, {"mensagem": "nivelCm obrigatorio"})
-            return self._json(201, _registrar_leitura(int(m.group(1)), c))
+            # a API Java nao converte tipos: nivelCm precisa ser inteiro (allow-coercion-of-scalars: false)
+            if isinstance(c.get("nivelCm"), bool) or not isinstance(c.get("nivelCm"), int):
+                return self._json(400, {"message": "nivelCm obrigatorio e inteiro"})
+            medida = c.get("medidaEm")
+            if medida and datetime.fromisoformat(medida.replace("Z", "+00:00")) > datetime.now(timezone.utc):
+                return self._json(400, {"message": "medidaEm: deve estar entre 30 dias atrás e agora"})
+            try:
+                return self._json(201, _registrar_leitura(int(m.group(1)), c))
+            except LeituraRepetida as e:
+                return self._json(409, {"status": 409, "error": "Conflict",
+                                        "message": f"Leitura já registrada para esta estação em {e}"})
         self._json(404, {"mensagem": "rota nao encontrada"})
 
     def do_GET(self):

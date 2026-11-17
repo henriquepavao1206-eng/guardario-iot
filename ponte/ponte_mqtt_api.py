@@ -24,7 +24,7 @@ from datetime import datetime, timezone
 
 import paho.mqtt.client as mqtt
 
-from cliente_api import ClienteApi, ErroDefinitivo, ErroTemporario
+from cliente_api import ClienteApi, ErroDefinitivo, ErroTemporario, LeituraJaRegistrada
 from config import Config
 from metricas import Metricas
 from regua import classificar
@@ -172,19 +172,27 @@ class Ponte:
             log.warning("[%s] API indisponivel (%s); nova tentativa em %ds (fila: %d)",
                         codigo, e, espera, len(self.pendentes))
             return
+        except LeituraJaRegistrada:
+            self.metricas.ja_registradas_api += 1
+            log.info("[%s] API ja tinha esta leitura (reenvio); nada a fazer", codigo)
+            return
         except ErroDefinitivo as e:
             self.metricas.erros_api += 1
             log.error("[%s] API recusou a leitura: %s", codigo, e)
             return
         self.metricas.enviadas_api += 1
         self.metricas.latencias_api_ms.append(latencia)
+        # LeituraRegistradaResponse: {"leitura": {..., "nivelRisco"}, "areaId", "nivelArea",
+        #                             "nivelAreaAlterado", "alertaGeradoId", "_links"}
+        risco_api = (resposta.get("leitura") or {}).get("nivelRisco", "?")
         alerta = resposta.get("alertaGeradoId")
         if alerta:
             self.metricas.alertas_gerados += 1
-            log.warning("[%s] >>> API GEROU ALERTA AUTOMATICO id=%s", codigo, alerta)
+            log.warning("[%s] >>> API GEROU ALERTA AUTOMATICO id=%s (risco %s, area %s)", codigo, alerta,
+                        risco_api, resposta.get("nivelArea", "?"))
         else:
-            log.info("[%s] leitura gravada na API em %.0f ms (risco %s)", codigo, latencia,
-                     resposta.get("nivelRisco", "?"))
+            log.info("[%s] leitura gravada na API em %.0f ms (risco %s, area %s)", codigo, latencia,
+                     risco_api, resposta.get("nivelArea", "?"))
 
     def _reenviar_pendentes(self):
         agora = time.time()

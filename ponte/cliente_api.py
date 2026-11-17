@@ -20,6 +20,14 @@ class ErroDefinitivo(Exception):
     """Falha que nao adianta repetir (400, 403, 404, 409)."""
 
 
+class LeituraJaRegistrada(Exception):
+    """409 da API para leitura repetida (mesmo medidaEm e mesmas medidas).
+
+    Acontece quando a ponte reenvia uma leitura que a API ja gravou (resposta
+    perdida por timeout, reenvio da fila). Nao e erro: a leitura esta salva.
+    """
+
+
 class ClienteApi:
     def __init__(self, url_base: str, email: str, senha: str, timeout_s: float = 5.0):
         self.url_base = url_base
@@ -66,5 +74,8 @@ class ClienteApi:
                 return (r.json() if r.content else {}), latencia
             if r.status_code >= 500:
                 raise ErroTemporario(f"API respondeu {r.status_code}")
+            # o outro 409 (estacao em MANUTENCAO/INATIVA) continua sendo ErroDefinitivo
+            if r.status_code == 409 and "registrada" in r.text.lower():
+                raise LeituraJaRegistrada(r.text[:200])
             raise ErroDefinitivo(f"API respondeu {r.status_code}: {r.text[:200]}")
         raise ErroDefinitivo("401 mesmo depois de novo login")

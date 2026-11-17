@@ -30,6 +30,7 @@ class Metricas:
         self.falhas_sensor = 0
         self.enviadas_api = 0
         self.erros_api = 0
+        self.ja_registradas_api = 0
         self.alertas_gerados = 0
         self.divergencias_regua = 0
         self.latencias_mqtt_ms: list[float] = []
@@ -113,6 +114,7 @@ class Metricas:
             "falhasSensor": self.falhas_sensor,
             "enviadasApi": self.enviadas_api,
             "errosApi": self.erros_api,
+            "jaRegistradasApi": self.ja_registradas_api,
             "alertasGerados": self.alertas_gerados,
             "divergenciasRegua": self.divergencias_regua,
             "latenciaEstacaoAtePonteMs": self._resumo(self.latencias_mqtt_ms[-1000:]),

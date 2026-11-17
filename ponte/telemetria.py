@@ -33,9 +33,13 @@ class Telemetria:
         return (not self.sensor_ok) or self.nivel_cm is None or self.risco == "FALHA_SENSOR"
 
     def medida_em(self, recebida_em: datetime) -> datetime:
-        """Hora da medicao: a da estacao (NTP) ou, sem relogio, a do recebimento."""
+        """Hora da medicao: a da estacao (NTP) ou, sem relogio, a do recebimento.
+
+        A API recusa medidaEm no futuro (400, sem tolerancia). Se o relogio da
+        estacao estiver adiantado em relacao ao da ponte, usa a hora do recebimento.
+        """
         if self.ts and self.ts > 1_700_000_000:
-            return datetime.fromtimestamp(self.ts, tz=timezone.utc)
+            return min(datetime.fromtimestamp(self.ts, tz=timezone.utc), recebida_em)
         return recebida_em
 
     def corpo_api(self, recebida_em: datetime) -> dict:
