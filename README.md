@@ -12,7 +12,6 @@
 | Arthur Lins Belarmino | RM566845 |
 
 **Simulação no Wokwi (pública):** <https://wokwi.com/projects/480501151869376513>
-**Vídeo da demonstração:** `https://youtu.be/COLOCAR-O-LINK-AQUI`
 
 ---
 
@@ -516,7 +515,7 @@ guardario-iot/
 | Desenvolvimento do protótipo | 25 | [`firmware/`](firmware/), [seção 2](#2-o-protótipo) e o link público do Wokwi |
 | Componentes e fluxo de comunicação em rede | 20 | [Seção 3](#3-componentes-e-fluxo-de-comunicação-em-rede) |
 | Diagrama da arquitetura | 15 | [Seção 4](#4-diagramas-da-arquitetura) (Figuras 1, 4, 5 e 6) |
-| Testes, evidências e demonstração | 20 | [Seção 6](#6-testes-evidências-e-métricas), [`docs/TESTES.md`](docs/TESTES.md), [`docs/evidencias/`](docs/evidencias/), vídeo |
+| Testes, evidências e demonstração | 20 | [Seção 6](#6-testes-evidências-e-métricas), [`docs/TESTES.md`](docs/TESTES.md), [`docs/evidencias/`](docs/evidencias/) e o link público do Wokwi |
 | Documentação técnica e justificativas | 10 | Seções [2](#2-o-protótipo), [5](#5-como-executar), [7](#7-justificativas-técnicas) e [8](#8-limitações) |
 
 **Bibliotecas:** PubSubClient (Nick O'Leary), ArduinoJson 7 (Benoît Blanchon), LiquidCrystal I2C, DHT sensor library for ESPx (beegee-tokyo), Preferences e WiFi (core Arduino-ESP32) · paho-mqtt 2.1 e requests (Python).
